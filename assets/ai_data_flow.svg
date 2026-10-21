@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1010" width="1500" height="1010" font-family="Segoe UI, Inter, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">DataTalk.AI — AI capability and data flow</title><desc id="d">How a user question becomes a verified AI answer: supervisor routing, planner, SQL agent, validator, insight composer, response agent and Pydantic validation.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f172a" flood-opacity=".12"/></filter></defs>
+<rect width="1500" height="1010" fill="#ffffff"/>
+<text x="40" y="48" font-size="26" font-weight="800" fill="#0f172a">DataTalk.AI · AI Capability &amp; Data Flow</text>
+<text x="40" y="74" font-size="14" fill="#475569">From a plain-English question to a verified answer. Purple badge = LLM call (Groq), blue = agent, grey = deterministic step, green = validation, red dashed = fallback path.</text>
+<rect x="300" y="100" width="1170" height="610" rx="18" fill="none" stroke="#c7d2fe" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="318" y="124" font-size="13" font-weight="700" fill="#4f46e5">ANALYTICS REASONING AGENT (orchestrator)</text>
+<g filter="url(#sh)"><rect x="40" y="110" width="230" height="90" rx="12" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/></g>
+<text x="54" y="136" font-size="15" font-weight="700" fill="#0f172a">1 · User question</text>
+<text x="54" y="158" font-size="12.5" fill="#334155">Typed or spoken (browser</text>
+<text x="54" y="176" font-size="12.5" fill="#334155">speech-to-text), reviewed first</text>
+<g filter="url(#sh)"><rect x="40" y="240" width="230" height="120" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/></g>
+<text x="54" y="266" font-size="15" font-weight="700" fill="#2563eb">2 · Supervisor agent</text>
+<text x="54" y="288" font-size="12.5" fill="#334155">Validates input (3–2,000 chars)</text>
+<text x="54" y="306" font-size="12.5" fill="#334155">Routes: quick action or AI</text>
+<text x="54" y="324" font-size="12.5" fill="#334155">No LLM call</text>
+<g filter="url(#sh)"><rect x="40" y="400" width="230" height="120" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/></g>
+<text x="54" y="426" font-size="15" font-weight="700" fill="#64748b">Quick actions</text>
+<text x="54" y="448" font-size="12.5" fill="#334155">Forecast, anomaly scan,</text>
+<text x="54" y="466" font-size="12.5" fill="#334155">overdue, sponsors, compare…</text>
+<text x="54" y="484" font-size="12.5" fill="#334155">pandas only · 0 LLM calls</text>
+<path d="M155,200 L155,240" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<path d="M155,360 L155,400" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<text x="163" y="388" font-size="12" fill="#475569" font-weight="600">keyword match</text>
+<g filter="url(#sh)"><rect x="330" y="140" width="330" height="160" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/></g>
+<text x="344" y="166" font-size="15" font-weight="700" fill="#2563eb">3 · Planner agent</text>
+<text x="344" y="188" font-size="12.5" fill="#334155">Splits the message into ≤5 sub-questions</text>
+<text x="344" y="206" font-size="12.5" fill="#334155">Grounded on schema, metric dictionary,</text>
+<text x="344" y="224" font-size="12.5" fill="#334155">distinct values, last 3 chat turns</text>
+<text x="344" y="242" font-size="12.5" fill="#334155">→ QueryPlan (Pydantic)</text>
+<rect x="344" y="268" width="123" height="22" rx="11" fill="#7c3aed"/><text x="405.5" y="283" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LLM: planner ×1</text>
+<path d="M270,280 L330,250" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<text x="276" y="232" font-size="12" fill="#475569" font-weight="600">open</text><text x="276" y="246" font-size="12" fill="#475569" font-weight="600">question</text>
+<path d="M660,220 L718,220" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<path d="M660,386 L690,386 L690,250 L718,250" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<g filter="url(#sh)"><rect x="330" y="340" width="330" height="92" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/></g>
+<text x="344" y="366" font-size="15" font-weight="700" fill="#64748b">Rule-based splitter</text>
+<text x="344" y="388" font-size="12.5" fill="#334155">Fallback if planner fails or</text>
+<text x="344" y="406" font-size="12.5" fill="#334155">under-splits (?, ;, lists, 'and also')</text>
+<path d="M495,300 L495,340" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arr)"/>
+<text x="503" y="326" font-size="12" fill="#dc2626" font-weight="600">invalid / unavailable</text>
+<rect x="700" y="140" width="420" height="530" rx="14" fill="#fafafa" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="716" y="164" font-size="13" font-weight="700" fill="#334155">FOR EACH SUB-QUESTION (dependent ones get upstream rows)</text>
+<g filter="url(#sh)"><rect x="720" y="180" width="380" height="122" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/></g>
+<text x="734" y="206" font-size="15" font-weight="700" fill="#2563eb">4 · SQL agent</text>
+<text x="734" y="228" font-size="12.5" fill="#334155">Writes one Databricks SELECT using</text>
+<text x="734" y="246" font-size="12.5" fill="#334155">certified metric definitions</text>
+<text x="734" y="264" font-size="12.5" fill="#334155">→ SqlGeneration (Pydantic)</text>
+<rect x="734" y="270" width="172" height="22" rx="11" fill="#7c3aed"/><text x="820.0" y="285" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LLM: sql_generation ×1</text>
+<path d="M910,302 L910,322" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<g filter="url(#sh)"><rect x="720" y="322" width="380" height="92" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/></g>
+<text x="734" y="348" font-size="15" font-weight="700" fill="#059669">5 · Read-only SQL validator</text>
+<text x="734" y="370" font-size="12.5" fill="#334155">sqlglot AST: one SELECT, approved table,</text>
+<text x="734" y="388" font-size="12.5" fill="#334155">raw columns only, row LIMIT enforced</text>
+<g filter="url(#sh)"><rect x="880" y="430" width="220" height="96" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/></g>
+<text x="894" y="456" font-size="15" font-weight="700" fill="#2563eb">SQL repair</text>
+<text x="894" y="478" font-size="12.5" fill="#334155">Fixes only reported errors</text>
+<rect x="894" y="494" width="151" height="22" rx="11" fill="#7c3aed"/><text x="969.5" y="509" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LLM: sql_repair 0–1</text>
+<path d="M1100,368 L1110,368 L1110,478 L1102,478" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arr)"/>
+<text x="1040" y="424" font-size="12" fill="#dc2626" font-weight="600">rejected</text>
+<path d="M940,430 L940,416" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<text x="946" y="426" font-size="12" fill="#475569" font-weight="600">re-check</text>
+<path d="M790,414 L790,536" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<text x="798" y="500" font-size="12" fill="#475569" font-weight="600">valid</text>
+<g filter="url(#sh)"><rect x="720" y="536" width="180" height="118" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/></g>
+<text x="734" y="562" font-size="15" font-weight="700" fill="#64748b">6 · Databricks</text>
+<text x="734" y="584" font-size="12.5" fill="#334155">Execute validated</text>
+<text x="734" y="602" font-size="12.5" fill="#334155">SQL (≤5,000 rows)</text>
+<text x="734" y="620" font-size="12.5" fill="#334155">→ result table</text>
+<g filter="url(#sh)"><rect x="916" y="536" width="184" height="118" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/></g>
+<text x="930" y="562" font-size="15" font-weight="700" fill="#64748b">7 · Chart builder</text>
+<text x="930" y="584" font-size="12.5" fill="#334155">Chart from result</text>
+<text x="930" y="602" font-size="12.5" fill="#334155">shape; values</text>
+<text x="930" y="620" font-size="12.5" fill="#334155">reconciled to table</text>
+<path d="M900,595 L914,595" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<g filter="url(#sh)"><rect x="1150" y="180" width="300" height="200" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/></g>
+<text x="1164" y="206" font-size="15" font-weight="700" fill="#2563eb">8 · Insight composer</text>
+<text x="1164" y="228" font-size="12.5" fill="#334155">Evidence registry F1…Fn</text>
+<text x="1164" y="246" font-size="12.5" fill="#334155">(median, gaps, spread, trend,</text>
+<text x="1164" y="264" font-size="12.5" fill="#334155">SLA headroom…)</text>
+<text x="1164" y="282" font-size="12.5" fill="#334155">Deterministic sections first,</text>
+<text x="1164" y="300" font-size="12.5" fill="#334155">optional AI rewording</text>
+<rect x="1164" y="348" width="144" height="22" rx="11" fill="#7c3aed"/><text x="1236.0" y="363" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LLM: narrative 0–1</text>
+<g filter="url(#sh)"><rect x="1150" y="406" width="300" height="120" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/></g>
+<text x="1164" y="432" font-size="15" font-weight="700" fill="#059669">9 · Evidence verification</text>
+<text x="1164" y="454" font-size="12.5" fill="#334155">InsightNarrative (Pydantic)</text>
+<text x="1164" y="472" font-size="12.5" fill="#334155">Every number must match evidence</text>
+<text x="1164" y="490" font-size="12.5" fill="#334155">Causal claims removed →</text>
+<text x="1164" y="508" font-size="12.5" fill="#334155">fallback to deterministic text</text>
+<path d="M1100,620 L1135,620 L1135,280 L1148,280" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<path d="M1300,380 L1300,404" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<g filter="url(#sh)"><rect x="330" y="460" width="330" height="210" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/></g>
+<text x="344" y="486" font-size="15" font-weight="700" fill="#2563eb">10 · Response agent</text>
+<text x="344" y="508" font-size="12.5" fill="#334155">Only when ≥2 sub-questions:</text>
+<text x="344" y="526" font-size="12.5" fill="#334155">• Synthesis: one answer per sub-question</text>
+<text x="344" y="544" font-size="12.5" fill="#334155">• QA review: completeness, drift,</text>
+<text x="344" y="562" font-size="12.5" fill="#334155">  unsupported or causal claims</text>
+<text x="344" y="580" font-size="12.5" fill="#334155">Pydantic: Synthesis, ResponseVerdict</text>
+<text x="344" y="598" font-size="12.5" fill="#334155">Numbers re-verified against evidence</text>
+<rect x="344" y="638" width="137" height="22" rx="11" fill="#7c3aed"/><text x="412.5" y="653" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LLM: synthesis ×1</text>
+<rect x="489" y="638" width="151" height="22" rx="11" fill="#7c3aed"/><text x="564.5" y="653" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LLM: validation 0–1</text>
+<path d="M1400,526 L1400,690 L600,690 L600,672" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<text x="760" y="684" font-size="12" fill="#475569" font-weight="600">verified insight per sub-question</text>
+<g filter="url(#sh)"><rect x="40" y="760" width="620" height="150" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/></g>
+<text x="54" y="786" font-size="15" font-weight="700" fill="#ea580c">11 · Final answer to the user</text>
+<text x="54" y="808" font-size="12.5" fill="#334155">AI Insight Findings text · reconciled charts · result table</text>
+<text x="54" y="826" font-size="12.5" fill="#334155">Insight panel: evidence, analysis, impact, reasoning, actions, SQL</text>
+<text x="54" y="844" font-size="12.5" fill="#334155">Unanswered sub-questions disclosed explicitly</text>
+<text x="54" y="862" font-size="12.5" fill="#334155">Per-answer AI call count, tokens and timing shown</text>
+<path d="M495,670 L495,720 L350,720 L350,758" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<path d="M155,520 L155,758" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+<g filter="url(#sh)"><rect x="700" y="760" width="380" height="150" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/></g>
+<text x="714" y="786" font-size="15" font-weight="700" fill="#7c3aed">Shared LLM client (core/llm.py)</text>
+<text x="714" y="808" font-size="12.5" fill="#334155">Groq chat completions · temperature 0 · fixed seed</text>
+<text x="714" y="826" font-size="12.5" fill="#334155">JSON response format → Pydantic validation</text>
+<text x="714" y="844" font-size="12.5" fill="#334155">≤3 requests per call: retry on 429/5xx/timeouts</text>
+<text x="714" y="862" font-size="12.5" fill="#334155">or malformed output (with correction prompt)</text>
+<text x="714" y="880" font-size="12.5" fill="#334155">Records purpose, model, duration, outcome, tokens</text>
+<g filter="url(#sh)"><rect x="1110" y="760" width="360" height="150" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/></g>
+<text x="1124" y="786" font-size="15" font-weight="700" fill="#ea580c">Direct-SQL fallback</text>
+<text x="1124" y="808" font-size="12.5" fill="#334155">Used only if the orchestrator fails</text>
+<text x="1124" y="826" font-size="12.5" fill="#334155">unexpectedly: SQL agent (1 + repair 0–1)</text>
+<text x="1124" y="844" font-size="12.5" fill="#334155">→ validator → Databricks →</text>
+<text x="1124" y="862" font-size="12.5" fill="#334155">insight composer (0–1) → answer</text>
+<path d="M1290,710 L1290,758" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arr)"/>
+<text x="1300" y="742" font-size="12" fill="#dc2626" font-weight="600">engine error</text>
+<rect x="40" y="950" width="22" height="16" rx="4" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="70" y="963" font-size="12.5" fill="#334155">LLM-related</text>
+<rect x="240" y="950" width="22" height="16" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="270" y="963" font-size="12.5" fill="#334155">AI agent</text>
+<rect x="440" y="950" width="22" height="16" rx="4" fill="#f8fafc" stroke="#64748b" stroke-width="2"/><text x="470" y="963" font-size="12.5" fill="#334155">Deterministic step</text>
+<rect x="640" y="950" width="22" height="16" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="2"/><text x="670" y="963" font-size="12.5" fill="#334155">Validation / guard rail</text>
+<rect x="840" y="950" width="22" height="16" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="870" y="963" font-size="12.5" fill="#334155">Output / fallback</text>
+<text x="40" y="994" font-size="12" fill="#64748b">One sub-question: 2–4 LLM calls (planner, SQL generation, optional repair, optional narrative). Each call may use up to 3 provider requests on retry.</text>
+</svg>
